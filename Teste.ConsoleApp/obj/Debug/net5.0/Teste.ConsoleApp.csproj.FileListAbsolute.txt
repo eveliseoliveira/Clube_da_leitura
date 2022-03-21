@@ -1,0 +1,16 @@
+C:\Evelise\Projetos VS\Teste\Teste.ConsoleApp\bin\Debug\net5.0\Teste.ConsoleApp.exe
+C:\Evelise\Projetos VS\Teste\Teste.ConsoleApp\bin\Debug\net5.0\Teste.ConsoleApp.deps.json
+C:\Evelise\Projetos VS\Teste\Teste.ConsoleApp\bin\Debug\net5.0\Teste.ConsoleApp.runtimeconfig.json
+C:\Evelise\Projetos VS\Teste\Teste.ConsoleApp\bin\Debug\net5.0\Teste.ConsoleApp.runtimeconfig.dev.json
+C:\Evelise\Projetos VS\Teste\Teste.ConsoleApp\bin\Debug\net5.0\Teste.ConsoleApp.dll
+C:\Evelise\Projetos VS\Teste\Teste.ConsoleApp\bin\Debug\net5.0\Teste.ConsoleApp.pdb
+C:\Evelise\Projetos VS\Teste\Teste.ConsoleApp\obj\Debug\net5.0\Teste.ConsoleApp.csproj.AssemblyReference.cache
+C:\Evelise\Projetos VS\Teste\Teste.ConsoleApp\obj\Debug\net5.0\Teste.ConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Evelise\Projetos VS\Teste\Teste.ConsoleApp\obj\Debug\net5.0\Teste.ConsoleApp.AssemblyInfoInputs.cache
+C:\Evelise\Projetos VS\Teste\Teste.ConsoleApp\obj\Debug\net5.0\Teste.ConsoleApp.AssemblyInfo.cs
+C:\Evelise\Projetos VS\Teste\Teste.ConsoleApp\obj\Debug\net5.0\Teste.ConsoleApp.csproj.CoreCompileInputs.cache
+C:\Evelise\Projetos VS\Teste\Teste.ConsoleApp\obj\Debug\net5.0\Teste.ConsoleApp.dll
+C:\Evelise\Projetos VS\Teste\Teste.ConsoleApp\obj\Debug\net5.0\refint\Teste.ConsoleApp.dll
+C:\Evelise\Projetos VS\Teste\Teste.ConsoleApp\obj\Debug\net5.0\Teste.ConsoleApp.pdb
+C:\Evelise\Projetos VS\Teste\Teste.ConsoleApp\obj\Debug\net5.0\Teste.ConsoleApp.genruntimeconfig.cache
+C:\Evelise\Projetos VS\Teste\Teste.ConsoleApp\obj\Debug\net5.0\ref\Teste.ConsoleApp.dll
