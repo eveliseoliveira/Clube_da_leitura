@@ -8,8 +8,6 @@ namespace Teste.ConsoleApp
 {
     internal class Emprestimo
     {
-       // public enum CaixaNumero { Dois, Tres }
-
         public Emprestimo()
         {
             this.Id_emprestimo = 1;
