@@ -8,32 +8,34 @@ namespace Teste.ConsoleApp
 {
     internal class Emprestimo
     {
+       // public enum CaixaNumero { Dois, Tres }
+
         public Emprestimo()
         {
-            this.Id = 1;
-            this.Nome = "";
+            this.Id_emprestimo = 1;
+            this.Nome_emprestimo = "";
             this.Id_revista = 1;
             this.Data_emprestimo = "";
             this.Data_devolucao = "";
         }
 
-        public Emprestimo(String nome, int id, int id_revista, String data_emprestimo, String data_devolucao)
+        public Emprestimo(String nome_emprestimo, int id_emprestimo, int id_revista, String data_emprestimo, String data_devolucao)
         {
-            this.Id = id;
-            this.Nome = nome;
+            this.Id_emprestimo = id_emprestimo;
+            this.Nome_emprestimo = nome_emprestimo;
             this.Id_revista = id_revista;
             this.Data_emprestimo = data_emprestimo;
             this.Data_devolucao = data_devolucao;
         }
 
-        private int id;
+        private int id_emprestimo;
 
-        public int Id
+        public int Id_emprestimo
         {
-            get { return id; }
+            get { return id_emprestimo; }
             set
             {
-                if (value >= 0) id = value;
+                if (value >= 0) id_emprestimo = value;
                 else
                 {
                     throw new Exception("Permitido apenas numeros positivos!");
@@ -55,12 +57,12 @@ namespace Teste.ConsoleApp
             }
         }
 
-        private String nome;
+        private String nome_emprestimo;
 
-        public String Nome
+        public String Nome_emprestimo
         {
-            get { return nome; }
-            set { nome = value.ToUpper(); }
+            get { return nome_emprestimo; }
+            set { nome_emprestimo = value.ToUpper(); }
         }
 
         private String data_emprestimo;
@@ -77,6 +79,12 @@ namespace Teste.ConsoleApp
         {
             get { return data_devolucao; }
             set { data_devolucao = value.ToUpper(); }
+        }
+
+        public Revista revista
+        {
+            get;
+            set; 
         }
     }
 }

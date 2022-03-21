@@ -3,14 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Teste.ConsoleApp.Controle;
 using static Teste.ConsoleApp.Revista;
 using static Teste.ConsoleApp.Amigo;
+using static Teste.ConsoleApp.Emprestimo;
+using static Teste.ConsoleApp.Reserva;
+using static Teste.ConsoleApp.ControleRevista;
+using static Teste.ConsoleApp.ControleAmigo;
+using static Teste.ConsoleApp.ControleEmprestimo;
+using static Teste.ConsoleApp.ControleReserva;
 
 namespace Teste.ConsoleApp
 {
     internal class Menu
     {
+        private object revista;
+
+        public ControleRevista ControleRevista { get; set; }
+        public ControleAmigo ControleAmigo { get; set; }
+        public ControleEmprestimo ControleEmprestimo { get; set; }
+        public ControleReserva ControleReserva { get; set; }
+
+
         #region  Menu Revistas
         public int MenuPrincipalRevistas()
         {
@@ -451,8 +464,13 @@ namespace Teste.ConsoleApp
 
             ListaDeEmprestimos lista_emprestimos = new ListaDeEmprestimos();
             List<Emprestimo> lista = new List<Emprestimo>(); //utilizado nos cases
-            String nome = "";
-            int id = 0;
+            String nome_emprestimo = "";
+            int id_emprestimo = 0;
+
+            ListaDeRevistas lista_revistas = new ListaDeRevistas();
+            List<Revista> lista_revista = new List<Revista>();
+            int Id = 0;
+
 
             Emprestimo emprestimo = new Emprestimo();
 
@@ -468,13 +486,10 @@ namespace Teste.ConsoleApp
                         emprestimo = new Emprestimo();
 
                         Console.Write("Id: ");
-                        emprestimo.Id = Convert.ToInt32(Console.ReadLine());
+                        emprestimo.Id_emprestimo = Convert.ToInt32(Console.ReadLine());
 
                         Console.Write("Nome: ");
-                        emprestimo.Nome = Console.ReadLine();
-
-                        Console.Write("Id da revista: ");
-                        emprestimo.Id_revista = Convert.ToInt32(Console.ReadLine());
+                        emprestimo.Nome_emprestimo = Console.ReadLine();
 
                         Console.Write("Data do empréstimo: ");
                         emprestimo.Data_emprestimo = Console.ReadLine();
@@ -496,9 +511,9 @@ namespace Teste.ConsoleApp
                     case 2: //excluir
                         Console.WriteLine("Excluir empréstimo\n");
                         Console.Write("Informe o id: ");
-                        id = Convert.ToInt32(Console.ReadLine());
+                        id_emprestimo = Convert.ToInt32(Console.ReadLine());
 
-                        if (lista_emprestimos.ExcluirEmprestimo(id))
+                        if (lista_emprestimos.ExcluirEmprestimo(id_emprestimo))
                         {
                             Console.WriteLine("\nEmpréstimo excluido!");
                         }
@@ -514,10 +529,10 @@ namespace Teste.ConsoleApp
                         emprestimo = new Emprestimo();
 
                         Console.Write("Id: ");
-                        emprestimo.Id = Convert.ToInt32(Console.ReadLine());
+                        emprestimo.Id_emprestimo = Convert.ToInt32(Console.ReadLine());
 
                         Console.Write("Nome: ");
-                        emprestimo.Nome = Console.ReadLine();
+                        emprestimo.Nome_emprestimo = Console.ReadLine();
 
                         Console.Write("Id da revista: ");
                         emprestimo.Id_revista = Convert.ToInt32(Console.ReadLine());
@@ -542,13 +557,13 @@ namespace Teste.ConsoleApp
                     case 4: //Localizar por nome
                         Console.WriteLine("Localizar empréstimo\n");
                         Console.Write("Informe o nome: ");
-                        nome = Console.ReadLine();
-                        lista = lista_emprestimos.LocalizaNome(nome);
+                        nome_emprestimo = Console.ReadLine();
+                        lista = lista_emprestimos.LocalizaNome(nome_emprestimo);
 
                         foreach (var e in lista)
                         {
-                            Console.Write("Id: " + e.Id);
-                            Console.Write("Nome: " + e.Nome);
+                            Console.Write("Id: " + e.Id_emprestimo);
+                            Console.Write("Nome: " + e.Nome_emprestimo);
                             Console.Write(" - Id revista: " + e.Id_revista);
                             Console.Write(" - Data de emprestimo: " + e.Data_emprestimo);
                             Console.Write(" - Data de devolução: " + e.Data_devolucao);
@@ -562,8 +577,8 @@ namespace Teste.ConsoleApp
                         Console.WriteLine("Mostrar todos os empréstimos\n");
                         foreach (var e in lista_emprestimos.Emprestimos)
                         {
-                            Console.Write("Id: " + e.Id);
-                            Console.Write("Nome: " + e.Nome);
+                            Console.Write("Id: " + e.Id_emprestimo);
+                            Console.Write("Nome: " + e.Nome_emprestimo);
                             Console.Write(" - Id revista: " + e.Id_revista);
                             Console.Write(" - Data de emprestimo: " + e.Data_emprestimo);
                             Console.Write(" - Data de devolução: " + e.Data_devolucao);
@@ -571,6 +586,169 @@ namespace Teste.ConsoleApp
                         }
                         Console.WriteLine("Aperte uma tecla para continuar");
                         Console.ReadKey();
+                        break;
+                }
+            }
+        }
+        #endregion
+
+        #region Menu Reserva
+        public int MenuPrincipalReserva()
+        {
+            Console.Clear();
+            Console.WriteLine("### CLUBE DA LEITURA ###\n");
+            Console.WriteLine("Selecione uma opcao:\n\n[1] Cadastrar uma reserva\n" +
+                "[2] Excluir uma reserva\n[3] Alterar uma reserva\n[4] Localizar uma reserva por nome\n" +
+                "[5] Listar por categoria\n[6] Mostrar todas as reservas\n[7] Fazer emprestimo\n[8] Sair\n");
+            int opcao = Convert.ToInt32(Console.ReadLine());
+            return opcao;
+        }
+
+        public void MenuReservas()
+        {
+
+            ListaDeReservas lista_reservas = new ListaDeReservas();
+            List<Reserva> lista = new List<Reserva>();
+            String nomereserva = "";
+            int dias_reserva = 0;
+
+            Reserva reserva = new Reserva();
+
+            int opcao = 0;
+            while (opcao != 8)
+            {
+                opcao = MenuPrincipalReserva();
+                Console.Clear();
+                switch (opcao)
+                {
+                    case 1: //inserir
+                        Console.WriteLine("Cadastrar reserva\n");
+                        reserva = new Reserva();
+
+                        Console.Write("Nome: ");
+                        reserva.Nome_reserva = Console.ReadLine();
+
+                        Console.Write("Dias de reserva: ");
+                        reserva.Dias_reserva = Convert.ToInt32(Console.ReadLine());
+
+                        Console.Write("Revista: ");
+                        reserva.Revista_reserva = Console.ReadLine();
+
+                        Console.WriteLine("\nInforme a categoria:\n[0] Regular\n[1] Novidade\n");
+                        reserva.Dias_revista = (Reserva.DiasRevistas)Convert.ToInt32(Console.ReadLine());
+
+                        if (lista_reservas.InserirReserva(reserva))
+                        {
+                            Console.WriteLine("\nRevista inserida!");
+
+                            if (reserva.Dias_revista != 0)
+                            {
+                                Console.WriteLine("Item categorizado como Novidade, apenas 3 dias para emprestimo!");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Item categorizado como Regular, apenas 2 dias para emprestimo!");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nRevista não inserida!");
+                        }
+                        Console.ReadKey();
+                        break;
+                    case 2: //excluir
+                        Console.WriteLine("Excluir revista");
+                        Console.Write("\nInforme o id da revista: ");
+                        dias_reserva = Convert.ToInt32(Console.ReadLine());
+                        if (lista_reservas.ExcluirReserva(dias_reserva))
+                        {
+                            Console.WriteLine("\nRevista reserva excluida!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nRevista reserva não excluida!");
+                        }
+                        Console.ReadKey();
+                        break;
+
+                    case 3: //Editar
+                        Console.WriteLine("Alterar reserva\n");
+                        reserva = new Reserva();
+
+                        Console.Write("Nome: ");
+                        reserva.Nome_reserva = Console.ReadLine();
+
+                        Console.Write("Dias de reserva: ");
+                        reserva.Dias_reserva = Convert.ToInt32(Console.ReadLine());
+
+                        Console.Write("Revista: ");
+                        reserva.Revista_reserva = Console.ReadLine();
+
+                        Console.WriteLine("\nInforme a categoria:\n[0] Regular\n[1] Novidade");
+                        reserva.Dias_revista = (Reserva.DiasRevistas)Convert.ToInt32(Console.ReadLine());
+
+                        if (lista_reservas.AlterarReserva(reserva))
+                        {
+                            Console.WriteLine("\nRevista reserva alterada!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nRevista reserva não alterada!");
+                        }
+                        Console.ReadKey();
+                        break;
+
+                    case 4: //Localizar por nome
+                        Console.WriteLine("Localizar reserva\n");
+                        Console.Write("Informe o nome da revista:\n");
+                        nomereserva = Console.ReadLine();
+                        lista = lista_reservas.LocalizarReserva(nomereserva);
+
+                        foreach (var r in lista)
+                        {
+                            Console.Write("Nome: " + r.Nome_reserva);
+                            Console.Write(" - Dias de reserva: " + r.Dias_reserva);
+                            Console.Write(" - Revista: " + r.Revista_reserva);
+                            Console.Write(" - Categoria: " + r.Dias_revista);
+                            Console.WriteLine();
+                        }
+
+                        Console.WriteLine("Aperte uma tecla para continuar");
+                        Console.ReadKey();
+                        break;
+                    case 5: //Listar Por Categoria
+                        Console.WriteLine("Listar por categoria");
+                        Console.WriteLine("\nInforme a categoria:\n[0] Regular\n[1] Novidade");
+                        DiasRevistas dias_revista = (DiasRevistas)Convert.ToInt32(Console.ReadLine());
+                        lista = lista_reservas.ListarPorCategoria(dias_revista);
+
+                            foreach (var r in lista)
+                        {
+                            Console.Write("Nome: " + r.Nome_reserva);
+                            Console.Write(" - Dias de reserva: " + r.Dias_reserva);
+                            Console.Write(" - Revista: " + r.Revista_reserva);
+                            Console.Write(" - Categoria: " + r.Dias_revista);
+                            Console.WriteLine();
+                        }
+                        Console.WriteLine("Aperte uma tecla para continuar");
+                        Console.ReadKey();
+                        break;
+                    case 6: //Listar todas as revistas
+                        Console.WriteLine("Mostrar todas as revistas reservas\n");
+                        foreach (var r in lista_reservas.Reservas)
+                        {
+                            Console.Write("Nome: " + r.Nome_reserva);
+                            Console.Write(" - Dias de reserva: " + r.Dias_reserva);
+                            Console.Write(" - Revista: " + r.Revista_reserva);
+                            Console.Write(" - Categoria: " + r.Dias_revista);
+                            Console.WriteLine();
+                        }
+                        Console.WriteLine("Aperte uma tecla para continuar");
+                        Console.ReadKey();
+                        break;
+                    case 7:
+                        MenuPrincipalEmprestimos();
+                        MenuEmprestimos();
                         break;
                 }
             }
